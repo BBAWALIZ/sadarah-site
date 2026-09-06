@@ -6,48 +6,48 @@
 <title>Sadarah — Request Data Deletion</title>
 <meta name="description" content="Request deletion of your Sadarah account and associated data." />
 <meta name="robots" content="noindex" />
-<link rel="icon" type="image/png" href="assets/logo.png" />
-<link rel="apple-touch-icon" href="assets/logo.png" />
+<link rel="icon" type="image/png" href="assets/app-icon.png" />
+<link rel="apple-touch-icon" href="assets/app-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Cairo:wght@400;600;700;800&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f4faf8; --card:#ffffff; --line:#dceae6; --line-soft:#e9f2ef;
-    --text:#10302a; --muted:#52706a; --faint:#7d948d;
-    --primary:#0c8d7e; --primary-2:#0a6f63;
-    --gold:#ee6a2b; --green:#1faf74; --red:#e1503f;
+    --bg:#F7F7F5; --card:#FFFFFF; --line:#E3E6EA; --line-soft:#ECEEF1;
+    --text:#17191C; --muted:#6C7076; --faint:#7C8188;
+    --primary:#5E7300; --primary-2:#4A5B00; --lime:#C8F02A; --lime-ink:#14210A; --lime-hover:#B4DC18; --lime-wash:#EEF7C9; --ink:#182238; --ink-soft:#EEF1F5; --ink-border:#CDD5E1;
+    --gold:#B35100; --green:#547A00; --red:#CA1966;
     --radius:18px; --shadow:0 18px 44px -22px rgba(16,48,42,.28);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{background:var(--bg);color:var(--text);font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;display:flex;flex-direction:column}
   body[dir="rtl"]{font-family:"Tajawal","Cairo",sans-serif;line-height:1.7}
-  h1,h2,h3{font-family:"Plus Jakarta Sans",sans-serif;letter-spacing:-.02em;line-height:1.15}
+  h1,h2,h3{font-family:"Inter",sans-serif;letter-spacing:-.02em;line-height:1.15}
   body[dir="rtl"] h1,body[dir="rtl"] h2,body[dir="rtl"] h3{font-family:"Cairo",sans-serif;letter-spacing:0}
   a{color:var(--primary-2);text-decoration:none}
   .wrap{max-width:680px;margin:0 auto;padding:0 22px;width:100%}
 
   /* glow */
   .glow{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none}
-  .glow::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(120px);opacity:.14;background:radial-gradient(circle,#12a594,transparent 70%);top:-200px;right:-120px}
-  .glow::after{content:"";position:absolute;width:460px;height:460px;border-radius:50%;filter:blur(120px);opacity:.10;background:radial-gradient(circle,#ee6a2b,transparent 70%);bottom:-200px;left:-120px}
+  .glow::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;filter:blur(120px);opacity:.14;background:radial-gradient(circle,#C8F02A,transparent 70%);top:-200px;right:-120px}
+  .glow::after{content:"";position:absolute;width:460px;height:460px;border-radius:50%;filter:blur(120px);opacity:.10;background:radial-gradient(circle,#182238,transparent 70%);bottom:-200px;left:-120px}
 
   /* nav */
   nav{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:rgba(255,255,255,.82);border-bottom:1px solid var(--line-soft)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:680px;margin:0 auto;padding:0 22px}
-  .brand{display:flex;align-items:center;gap:10px;font-family:"Plus Jakarta Sans";font-weight:800;font-size:1.2rem;color:var(--text)}
+  .brand{display:flex;align-items:center;gap:10px;font-family:"Inter";font-weight:800;font-size:1.2rem;color:var(--text)}
   body[dir="rtl"] .brand{font-family:"Cairo"}
   .brand img{height:38px;width:auto;display:block}
   .nav-right{display:flex;align-items:center;gap:10px}
   .lang-switch{height:34px;padding:0 13px;border-radius:999px;border:1px solid var(--line);display:grid;place-items:center;font-weight:700;color:var(--primary-2);font-size:.85rem;background:#fff;cursor:pointer;font-family:"Inter"}
-  .lang-switch:hover{border-color:var(--primary);background:rgba(18,165,148,.08)}
+  .lang-switch:hover{border-color:var(--primary);background:var(--lime-wash)}
   .home-link{font-size:.9rem;color:var(--muted)}
   .home-link:hover{color:var(--text)}
 
   main{flex:1;padding:46px 0 70px}
   .head{margin-bottom:26px}
-  .eyebrow{color:var(--gold);font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
+  .eyebrow{color:var(--primary);font-weight:700;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:12px}
   body[dir="rtl"] .eyebrow{letter-spacing:.02em;text-transform:none;font-weight:800}
   .head h1{font-size:clamp(1.8rem,4vw,2.4rem);font-weight:800;margin-bottom:12px}
   .head p{color:var(--muted);font-size:1.04rem}
@@ -56,15 +56,15 @@
   .field{margin-bottom:18px}
   .field label{display:block;font-weight:600;font-size:.92rem;margin-bottom:7px}
   .field .req{color:var(--red)}
-  .field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:.96rem;font-family:inherit;color:var(--text);background:#fff;transition:.18s}
-  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(18,165,148,.14)}
+  .field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:8px;padding:12px 14px;font-size:.96rem;font-family:inherit;color:var(--text);background:#fff;transition:.18s}
+  .field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px var(--lime-wash)}
   .field textarea{min-height:92px;resize:vertical}
   .hint{font-size:.82rem;color:var(--faint);margin-top:6px}
-  .check{display:flex;gap:11px;align-items:flex-start;background:#fbf3ef;border:1px solid rgba(238,106,43,.28);border-radius:12px;padding:13px 14px;margin-bottom:20px}
+  .check{display:flex;gap:11px;align-items:flex-start;background:var(--ink-soft);border:1px solid var(--ink-border);border-radius:12px;padding:13px 14px;margin-bottom:20px}
   .check input{margin-top:3px;width:18px;height:18px;accent-color:var(--primary);flex:0 0 auto}
-  .check label{font-size:.9rem;color:#7a3a1c}
-  .btn{width:100%;border:none;border-radius:999px;padding:14px;font-size:1rem;font-weight:700;font-family:inherit;color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2));cursor:pointer;transition:.2s;box-shadow:0 10px 26px -8px rgba(12,125,114,.6)}
-  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px -8px rgba(12,125,114,.7)}
+  .check label{font-size:.9rem;color:var(--ink)}
+  .btn{width:100%;border:none;border-radius:8px;padding:14px;font-size:1rem;font-weight:700;font-family:inherit;color:var(--lime-ink);background:var(--lime);cursor:pointer;transition:.2s;box-shadow:0 10px 20px rgba(200,240,42,.30)}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px -8px rgba(200,240,42,.4)}
   .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
   .err{color:var(--red);font-size:.85rem;margin-top:10px;display:none}
 
@@ -74,10 +74,10 @@
   @keyframes pop{0%{transform:scale(.6);opacity:0}100%{transform:scale(1);opacity:1}}
   .success h2{font-size:1.6rem;margin-bottom:10px}
   .success p{color:var(--muted);margin-bottom:16px}
-  .ref{display:inline-block;background:#eef6f3;border:1px dashed var(--primary);border-radius:10px;padding:9px 16px;font-family:"Inter";font-weight:700;color:var(--primary-2);letter-spacing:.04em;margin-bottom:6px}
+  .ref{display:inline-block;background:var(--lime-wash);border:1px dashed var(--primary);border-radius:10px;padding:9px 16px;font-family:"Inter";font-weight:700;color:var(--primary-2);letter-spacing:.04em;margin-bottom:6px}
   .success .small{font-size:.84rem;color:var(--faint);margin-top:14px}
-  .what{margin-top:20px;background:#f6fbf9;border:1px solid var(--line);border-radius:13px;padding:16px 18px}
-  .what b{font-family:"Plus Jakarta Sans";font-size:.95rem;display:block;margin-bottom:8px}
+  .what{margin-top:20px;background:var(--ink-soft);border:1px solid var(--ink-border);border-radius:13px;padding:16px 18px}
+  .what b{font-family:"Inter";font-size:.95rem;display:block;margin-bottom:8px}
   body[dir="rtl"] .what b{font-family:"Cairo"}
   .what ul{margin:0;padding-inline-start:20px;color:var(--muted);font-size:.9rem}
   .what li{margin-bottom:5px}
@@ -92,7 +92,7 @@
 
 <nav>
   <div class="nav-in">
-    <a class="brand" href="index.html"><img src="assets/logo.png" alt="Sadarah" /> <span data-i18n="brand">Sadarah</span></a>
+    <a class="brand" href="index.html"><img src="assets/app-icon.png" alt="" style="width:30px;height:30px;border-radius:8px" /> <span data-i18n="brand">Sadarah</span></a>
     <div class="nav-right">
       <a class="home-link" href="index.html" data-i18n="home">← Home</a>
       <button class="lang-switch" id="langBtn" onclick="setLang(document.documentElement.lang==='ar'?'en':'ar')">ع</button>

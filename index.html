@@ -8,21 +8,27 @@
 <meta property="og:title" content="Sadarah — Your game, in one place" />
 <meta property="og:description" content="One skill rating across every academy. Climb the leaderboard, join sessions, unlock badges, and own your top spot." />
 <meta property="og:type" content="website" />
-<link rel="icon" type="image/png" href="assets/logo.png" />
-<link rel="apple-touch-icon" href="assets/logo.png" />
+<link rel="icon" type="image/png" href="assets/app-icon.png" />
+<link rel="apple-touch-icon" href="assets/app-icon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f4faf8; --bg-soft:#ffffff; --card:#ffffff; --card-2:#eef6f3;
-    --line:#dceae6; --line-soft:#e9f2ef;
-    --text:#10302a; --muted:#52706a; --faint:#7d948d;
-    --primary:#0c8d7e; --primary-2:#0a6f63; --primary-soft:#0a5a52;
-    --gold:#ee6a2b; --gold-2:#dc451c;
-    --green:#1faf74; --red:#e1503f; --violet:#e88a2c;
-    --radius:18px; --radius-lg:26px;
-    --shadow:0 18px 44px -22px rgba(16,48,42,.28);
+    /* Sadarah design system — Lime + Ink Navy (design-system/tokens.css) */
+    --bg:#F7F7F5; --bg-soft:#FFFFFF; --card:#FFFFFF; --card-2:#F1F2EF;
+    --line:#E3E6EA; --line-soft:#ECEEF1;
+    --text:#17191C; --muted:#6C7076; --faint:#7C8188;
+    --lime:#C8F02A; --lime-ink:#14210A; --lime-hover:#B4DC18; --lime-wash:#EEF7C9; --lime-text:#5E7300;
+    --primary:#5E7300; --primary-2:#4A5B00; --primary-soft:#3A4700;
+    --ink:#182238; --ink-deep:#101827; --ink-soft:#EEF1F5; --ink-soft-strong:#E3E8F0; --ink-border:#CDD5E1;
+    --ink-plate:#161C2E; --ink-plate-gradient:linear-gradient(180deg,#22293C 0%,#161C2E 55%,#0A0D16 100%);
+    --gold:#B35100; --gold-2:#8F4000;
+    --green:#547A00; --red:#CA1966; --violet:#182238;
+    --radius:16px; --radius-lg:24px; --radius-btn:8px;
+    --shadow:0 4px 12px rgba(0,0,0,.04);
+    --shadow-glow:0 10px 20px rgba(200,240,42,.30);
+    --shadow-plate:0 8px 18px rgba(16,24,39,.45);
     --maxw:1160px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -30,96 +36,96 @@
   body{
     background:var(--bg); color:var(--text);
     font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-    line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+    line-height:1.6; font-weight:500; -webkit-font-smoothing:antialiased; overflow-x:hidden;
   }
-  h1,h2,h3,h4,.display{font-family:"Plus Jakarta Sans",sans-serif;letter-spacing:-.02em;line-height:1.1}
+  h1,h2,h3,h4,.display{font-family:"Inter",sans-serif;letter-spacing:-.025em;line-height:1.08;font-weight:800}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
-  .accent{color:var(--gold)}
-  .grad-text{background:linear-gradient(105deg,var(--primary-2) 0%,var(--primary) 40%,var(--gold) 105%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .accent{color:var(--lime-text)}
+  .grad-text{color:var(--ink);background:linear-gradient(transparent 62%,var(--lime) 62%,var(--lime) 92%,transparent 92%);padding:0 .08em;border-radius:2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 
   /* ---------- background glow ---------- */
   .glow{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-  .glow::before,.glow::after{content:"";position:absolute;border-radius:50%;filter:blur(120px);opacity:.16}
-  .glow::before{width:620px;height:620px;background:radial-gradient(circle,#12a594,transparent 70%);top:-220px;left:-120px}
-  .glow::after{width:560px;height:560px;background:radial-gradient(circle,#ee6a2b,transparent 70%);top:380px;right:-180px;opacity:.12}
+  .glow::before,.glow::after{content:"";position:absolute;border-radius:50%;filter:blur(120px);opacity:.22}
+  .glow::before{width:620px;height:620px;background:radial-gradient(circle,#C8F02A,transparent 70%);top:-220px;left:-120px}
+  .glow::after{width:560px;height:560px;background:radial-gradient(circle,#182238,transparent 70%);top:380px;right:-180px;opacity:.10}
 
   /* ---------- nav ---------- */
   nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
-      background:rgba(255,255,255,.82);border-bottom:1px solid var(--line-soft)}
+      background:rgba(247,247,245,.86);border-bottom:1px solid var(--line)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:66px}
-  .brand{display:flex;align-items:center;gap:10px;font-family:"Plus Jakarta Sans";font-weight:800;font-size:1.2rem}
+  .brand{display:flex;align-items:center;gap:10px;font-family:"Inter";font-weight:800;font-size:1.2rem}
   .brand .mark{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;
-    background:radial-gradient(circle at 50% 120%,var(--primary) 0%,var(--primary-2) 55%,#063a35 100%);
-    color:#fff;font-size:1.05rem;border:1.5px solid rgba(242,106,46,.55);
-    box-shadow:0 6px 16px -4px rgba(18,165,148,.6),inset 0 0 0 1px rgba(255,255,255,.06)}
+    background:radial-gradient(circle at 50% 120%,var(--primary) 0%,var(--primary-2) 55%,#0A0D16 100%);
+    color:#fff;font-size:1.05rem;border:1.5px solid rgba(200,240,42,.55);
+    box-shadow:0 6px 16px -4px rgba(200,240,42,.35),inset 0 0 0 1px rgba(255,255,255,.06)}
   .brand .mark svg{width:17px;height:17px;display:block}
-  .brand .logo{height:42px;width:auto;display:block}
+  .brand .logo{height:34px;width:34px;border-radius:9px;display:block}.brand .wm{height:15px;width:auto;display:block}
   .nav-links{display:flex;gap:30px;align-items:center}
-  .nav-links a{color:var(--muted);font-size:.92rem;font-weight:500;transition:color .2s}
+  .nav-links a{color:var(--muted);font-size:.92rem;font-weight:600;transition:color .2s}
   .nav-links a:hover{color:var(--text)}
-  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;border-radius:999px;
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:800;border-radius:var(--radius-btn);
     padding:11px 22px;font-size:.92rem;cursor:pointer;border:1px solid transparent;transition:.2s;white-space:nowrap}
-  .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;
-    box-shadow:0 10px 26px -8px rgba(12,125,114,.7)}
-  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 34px -8px rgba(12,125,114,.8)}
-  .btn-ghost{background:transparent;border-color:var(--line);color:var(--text)}
-  .btn-ghost:hover{border-color:var(--primary);background:rgba(18,165,148,.08)}
+  .btn-primary{background:var(--lime);color:var(--lime-ink);box-shadow:var(--shadow-glow)}
+  .btn-primary:hover{background:var(--lime-hover);transform:translateY(-2px);box-shadow:0 14px 26px rgba(200,240,42,.38)}
+  .btn-ghost{background:var(--ink-soft);border-color:var(--ink-soft);color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink-soft-strong);border-color:var(--ink-border)}
   .nav-links a{white-space:nowrap}
-  .lang-switch{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;
-    font-weight:800;color:var(--primary-2);font-size:1.05rem;transition:.2s;background:var(--card)}
-  .lang-switch:hover{border-color:var(--primary);background:rgba(18,165,148,.08)}
+  .lang-switch{width:36px;height:36px;border-radius:var(--radius-btn);border:1px solid var(--line);display:grid;place-items:center;
+    font-weight:800;color:var(--ink);font-size:1.05rem;transition:.2s;background:var(--card)}
+  .lang-switch:hover{border-color:var(--ink-border);background:var(--ink-soft)}
   @media(max-width:980px){.nav-links{display:none}}
+  @media(max-width:520px){.brand .wm{display:none}.brand .logo{height:38px;width:38px}}
 
   /* ---------- hero ---------- */
   .hero{padding:78px 0 60px;position:relative}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
-  .pill{display:inline-flex;align-items:center;gap:8px;background:rgba(18,165,148,.1);
-    border:1px solid rgba(18,165,148,.32);color:#0a6f63;font-weight:600;font-size:.8rem;
+  .pill{display:inline-flex;align-items:center;gap:8px;background:var(--lime-wash);
+    border:1px solid rgba(94,115,0,.25);color:var(--lime-text);font-weight:600;font-size:.8rem;
     padding:7px 14px;border-radius:999px;margin-bottom:22px}
-  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(47,201,138,.25)}
+  .pill .dot{width:7px;height:7px;border-radius:50%;background:var(--lime-text);box-shadow:0 0 0 3px rgba(84,122,0,.25)}
   .hero h1{font-size:clamp(2.5rem,5.4vw,4.1rem);font-weight:800;margin-bottom:20px}
   .hero p.lead{font-size:1.18rem;color:var(--muted);max-width:540px;margin-bottom:30px}
   .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
   .hero-meta{display:flex;gap:28px;margin-top:34px;flex-wrap:wrap}
-  .hero-meta .m b{font-family:"Plus Jakarta Sans";font-size:1.5rem;font-weight:800;display:block}
+  .hero-meta .m b{font-family:"Inter";font-size:1.5rem;font-weight:800;display:block}
   .hero-meta .m span{color:var(--faint);font-size:.82rem}
   .sub-en{font-size:.9rem;color:var(--faint)}
-  .arabic{font-family:"Plus Jakarta Sans";direction:rtl}
+  .arabic{font-family:"Inter";direction:rtl}
 
   /* phone */
   .phone-stage{position:relative;display:flex;justify-content:center;align-items:center;min-height:540px}
-  .phone{width:286px;border-radius:42px;background:#05070f;padding:11px;
-    box-shadow:0 40px 80px -24px rgba(0,0,0,.85),0 0 0 1px var(--line);position:relative;z-index:2}
-  .phone .screen{border-radius:32px;overflow:hidden;background:#f5f7fb;height:580px;position:relative}
+  .phone{width:286px;border-radius:42px;background:var(--ink-plate);padding:11px;
+    box-shadow:0 40px 80px -24px rgba(16,24,39,.55),0 0 0 1px var(--ink-border);position:relative;z-index:2}
+  .phone .screen{border-radius:32px;overflow:hidden;background:#F7F7F5;height:580px;position:relative}
   .phone .notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:120px;height:24px;
-    background:#05070f;border-radius:0 0 16px 16px;z-index:5}
+    background:var(--ink-plate);border-radius:0 0 16px 16px;z-index:5}
   .float-card{position:absolute;z-index:3;background:var(--card);border:1px solid var(--line);
-    border-radius:16px;padding:13px 16px;box-shadow:var(--shadow);backdrop-filter:blur(8px)}
+    border-radius:var(--radius);padding:13px 16px;box-shadow:0 12px 28px rgba(16,24,39,.12);backdrop-filter:blur(8px)}
   .fc-1{top:42px;left:-26px;animation:float 5s ease-in-out infinite}
   .fc-2{bottom:64px;right:-30px;animation:float 5.6s ease-in-out infinite .6s}
   @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
   /* in-screen mock UI (rating screen) */
-  .m-app{height:100%;background:linear-gradient(180deg,#eef3fc,#f6f8fd);color:#101828;
+  .m-app{height:100%;background:#F7F7F5;color:#17191C;
     font-family:"Inter";display:flex;flex-direction:column}
-  .m-top{padding:38px 18px 16px;background:linear-gradient(135deg,#0c7d72,#12a594);color:#fff}
-  .m-top .hi{font-size:.78rem;opacity:.85}
-  .m-top .nm{font-family:"Plus Jakarta Sans";font-weight:700;font-size:1.15rem}
-  .m-rating{margin-top:14px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
+  .m-top{padding:38px 18px 16px;background:#F7F7F5;color:var(--text)}
+  .m-top .hi{font-size:.78rem;color:var(--lime-text);font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+  .m-top .nm{font-family:"Inter";font-weight:700;font-size:1.15rem}
+  .m-rating{margin-top:14px;background:var(--lime);color:var(--lime-ink);border:1px solid rgba(20,33,10,.06);box-shadow:var(--shadow-glow);
     border-radius:16px;padding:14px;display:flex;align-items:center;justify-content:space-between}
-  .m-rating .score{font-family:"Plus Jakarta Sans";font-weight:800;font-size:2rem;line-height:1}
-  .m-rating .lbl{font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;opacity:.85}
-  .m-tier{background:var(--gold);color:#3a2c05;font-weight:800;font-size:.7rem;padding:5px 11px;border-radius:999px}
+  .m-rating .score{font-family:"Inter";font-weight:800;font-size:2rem;line-height:1}
+  .m-rating .lbl{font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;font-weight:800;opacity:.75}
+  .m-tier{background:var(--ink-soft);color:var(--ink);border:1px solid var(--ink-border);letter-spacing:.06em;font-weight:800;font-size:.7rem;padding:5px 11px;border-radius:999px}
   .m-body{padding:14px 16px;display:flex;flex-direction:column;gap:11px;flex:1}
-  .m-row{background:#fff;border:1px solid #e7ecf5;border-radius:13px;padding:11px 13px;
+  .m-row{background:#fff;border:1px solid var(--line);border-radius:13px;padding:11px 13px;
     display:flex;align-items:center;justify-content:space-between;font-size:.82rem}
   .m-row .rk{width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-weight:800;font-size:.72rem;color:#fff}
   .m-row .who{display:flex;align-items:center;gap:9px;font-weight:600}
-  .m-row .pts{font-weight:700;color:#0c7d72;font-size:.78rem}
-  .m-row.me{border-color:#bfeae2;background:linear-gradient(90deg,#e6fbf6,#fff)}
+  .m-row .pts{font-weight:800;color:var(--text);font-size:.78rem}
+  .m-row.me{border-color:rgba(94,115,0,.45);background:linear-gradient(90deg,var(--lime-wash),#fff)}
   .m-bars{display:flex;gap:5px;align-items:flex-end;height:30px}
-  .m-bars i{flex:1;background:linear-gradient(180deg,#12a594,#6fe0d0);border-radius:3px;display:block}
+  .m-bars i{flex:1;background:linear-gradient(180deg,#C8F02A,#84BE00);border-radius:3px;display:block}
 
   @media(max-width:880px){
     .hero-grid{grid-template-columns:1fr;gap:30px}
@@ -129,27 +135,27 @@
 
   /* ---------- section scaffolding ---------- */
   section{padding:84px 0;position:relative}
-  .eyebrow{color:var(--gold);font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
+  .eyebrow{color:var(--lime-text);font-weight:700;font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
   .sec-head{max-width:680px;margin-bottom:50px}
   .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
   .sec-head h2{font-size:clamp(2rem,3.6vw,2.9rem);font-weight:800;margin-bottom:16px}
   .sec-head p{color:var(--muted);font-size:1.1rem}
 
   /* ---------- rating spotlight ---------- */
-  .rating-band{background:linear-gradient(135deg,#ecf6f3,#f8fcfb);border:1px solid var(--line);
+  .rating-band{background:var(--ink-soft);border:1px solid var(--ink-soft-strong);
     border-radius:var(--radius-lg);padding:46px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;overflow:hidden;position:relative}
   .rating-band::after{content:"";position:absolute;width:420px;height:420px;border-radius:50%;
-    background:radial-gradient(circle,rgba(242,106,46,.16),transparent 70%);top:-120px;right:-80px}
+    background:radial-gradient(circle,rgba(200,240,42,.22),transparent 70%);top:-120px;right:-80px}
   .ring{position:relative;width:230px;height:230px;margin:0 auto}
   .ring svg{transform:rotate(-90deg)}
   .ring .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .ring .center b{font-family:"Plus Jakarta Sans";font-size:3rem;font-weight:800;line-height:1}
-  .ring .center small{color:var(--gold);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.78rem;margin-top:6px}
+  .ring .center b{font-family:"Inter";font-size:3rem;font-weight:800;line-height:1}
+  .ring .center small{color:var(--lime-text);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.78rem;margin-top:6px}
   .ring .center em{color:var(--faint);font-style:normal;font-size:.78rem}
   .rb-points li{list-style:none;display:flex;gap:13px;margin-bottom:16px;align-items:flex-start}
   .rb-points .ic{flex:0 0 38px;height:38px;border-radius:11px;display:grid;place-items:center;
-    background:rgba(18,165,148,.14);border:1px solid rgba(18,165,148,.3);font-size:1.1rem}
-  .rb-points b{display:block;font-family:"Plus Jakarta Sans";font-size:1.02rem;margin-bottom:2px}
+    background:var(--card);border:1px solid var(--ink-border);font-size:1.1rem}
+  .rb-points b{display:block;font-family:"Inter";font-size:1.02rem;margin-bottom:2px}
   .rb-points span{color:var(--muted);font-size:.92rem}
   @media(max-width:880px){.rating-band{grid-template-columns:1fr;padding:30px}}
 
@@ -157,62 +163,61 @@
   .grid{display:grid;gap:20px}
   .g3{grid-template-columns:repeat(3,1fr)}
   .g2{grid-template-columns:repeat(2,1fr)}
-  .card-ui{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;transition:.25s;position:relative;overflow:hidden}
-  .card-ui:hover{transform:translateY(-4px);border-color:rgba(18,165,148,.5);box-shadow:0 22px 44px -22px rgba(12,125,114,.55)}
+  .card-ui{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);transition:.25s;position:relative;overflow:hidden}
+  .card-ui:hover{transform:translateY(-4px);border-color:var(--ink-border);box-shadow:0 22px 44px -22px rgba(16,24,39,.14)}
   .card-ui .ic{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:1.35rem;margin-bottom:16px;
-    background:rgba(18,165,148,.13);border:1px solid rgba(18,165,148,.28)}
+    background:var(--ink-soft);border:1px solid var(--ink-soft-strong)}
   .card-ui h3{font-size:1.18rem;margin-bottom:8px}
   .card-ui p{color:var(--muted);font-size:.95rem}
   @media(max-width:880px){.g3{grid-template-columns:1fr}.g2{grid-template-columns:1fr}}
 
   /* ---------- personas ---------- */
   .tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:34px;justify-content:center}
-  .tab{border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:600;
-    padding:11px 20px;border-radius:999px;cursor:pointer;font-size:.92rem;transition:.2s;display:flex;align-items:center;gap:9px}
+  .tab{border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:700;
+    padding:11px 20px;border-radius:var(--radius-btn);cursor:pointer;font-size:.92rem;transition:.2s;display:flex;align-items:center;gap:9px}
   .tab .e{font-size:1.05rem}
-  .tab[aria-selected="true"]{background:linear-gradient(135deg,var(--primary),var(--primary-2));color:#fff;border-color:transparent;
-    box-shadow:0 10px 26px -10px rgba(12,125,114,.7)}
+  .tab[aria-selected="true"]{background:var(--lime);color:var(--lime-ink);border-color:transparent;box-shadow:var(--shadow-glow)}
   .panel{display:none;animation:fade .35s ease}
   .panel[data-active="true"]{display:block}
   @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   .persona{display:grid;grid-template-columns:.9fr 1.1fr;gap:40px;align-items:center;
-    background:linear-gradient(135deg,#ecf6f3,#f8fcfb);border:1px solid var(--line);border-radius:var(--radius-lg);padding:40px}
+    background:var(--ink-soft);border:1px solid var(--ink-soft-strong);border-radius:var(--radius-lg);padding:40px}
   .persona h3{font-size:1.7rem;margin-bottom:8px}
-  .persona .role-tag{color:var(--gold);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
+  .persona .role-tag{color:var(--lime-text);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px}
   .persona p.intro{color:var(--muted);margin-bottom:22px}
   .benefit{display:flex;gap:13px;margin-bottom:15px;align-items:flex-start}
-  .benefit .chk{flex:0 0 24px;height:24px;border-radius:50%;background:rgba(47,201,138,.16);
-    border:1px solid rgba(47,201,138,.4);display:grid;place-items:center;color:var(--green);font-size:.8rem;font-weight:800}
-  .benefit b{font-family:"Plus Jakarta Sans"}
+  .benefit .chk{flex:0 0 24px;height:24px;border-radius:50%;background:var(--lime);
+    border:1px solid transparent;display:grid;place-items:center;color:var(--lime-ink);font-size:.8rem;font-weight:800}
+  .benefit b{font-family:"Inter"}
   .benefit span{color:var(--muted);font-size:.92rem;display:block}
-  .persona-visual{background:#eef6f3;border:1px solid var(--line);border-radius:18px;padding:24px;min-height:280px}
+  .persona-visual{background:var(--card-2);border:1px solid var(--line);border-radius:18px;padding:24px;min-height:280px}
   @media(max-width:880px){.persona{grid-template-columns:1fr;padding:26px}}
 
   /* ---------- events ---------- */
   .evt-flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:46px}
   .evt-step{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:22px 16px 18px;text-align:center;position:relative;transition:.25s}
-  .evt-step:hover{transform:translateY(-4px);border-color:rgba(18,165,148,.5);box-shadow:0 20px 40px -22px rgba(12,125,114,.5)}
-  .evt-step .n{position:absolute;top:12px;inset-inline-start:12px;width:24px;height:24px;border-radius:50%;background:rgba(18,165,148,.12);color:var(--primary-2);font-weight:800;font-size:.74rem;display:grid;place-items:center;font-family:"Inter"}
+  .evt-step:hover{transform:translateY(-4px);border-color:var(--ink-border);box-shadow:0 20px 40px -22px rgba(16,24,39,.12)}
+  .evt-step .n{position:absolute;top:12px;inset-inline-start:12px;width:24px;height:24px;border-radius:7px;background:var(--ink-soft);color:var(--ink);font-weight:800;font-size:.74rem;display:grid;place-items:center;font-family:"Inter"}
   .evt-step .ic{font-size:1.6rem;margin:4px 0 10px}
-  .evt-step b{display:block;font-family:"Plus Jakarta Sans";font-size:.98rem;margin-bottom:5px}
+  .evt-step b{display:block;font-family:"Inter";font-size:.98rem;margin-bottom:5px}
   .evt-step span{color:var(--faint);font-size:.82rem}
-  .modes-head{font-family:"Plus Jakarta Sans";font-weight:800;font-size:1.15rem;margin-bottom:6px}
+  .modes-head{font-family:"Inter";font-weight:800;font-size:1.15rem;margin-bottom:6px}
   .modes-sub{color:var(--muted);font-size:.95rem;margin-bottom:22px}
   .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-  .mode-card{background:linear-gradient(135deg,#ecf6f3,#f8fcfb);border:1px solid var(--line);border-radius:var(--radius);padding:24px;text-align:center}
+  .mode-card{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--radius);padding:24px;text-align:center}
   .mode-card .viz{height:84px;display:grid;place-items:center;margin-bottom:14px}
   .mode-card h4{font-size:1.08rem;margin-bottom:6px}
   .mode-card p{color:var(--muted);font-size:.9rem}
-  .mode-card .tagx{display:inline-block;margin-top:12px;font-size:.72rem;font-weight:700;color:var(--primary-2);background:rgba(18,165,148,.1);border:1px solid rgba(18,165,148,.28);border-radius:999px;padding:4px 12px}
+  .mode-card .tagx{display:inline-block;margin-top:12px;font-size:.72rem;font-weight:700;color:var(--lime-text);background:var(--lime-wash);border:1px solid rgba(94,115,0,.25);border-radius:6px;padding:4px 12px}
   @media(max-width:880px){.modes{grid-template-columns:1fr}}
 
   /* ---------- engagement / attachment ---------- */
   .eng-hero{text-align:center;max-width:760px;margin:0 auto 54px}
   .loop{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:64px}
   .loop .step{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 16px;text-align:center;position:relative}
-  .loop .step .n{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-2));
-    color:#fff;font-weight:800;display:grid;place-items:center;margin:0 auto 12px;font-size:.85rem}
-  .loop .step b{display:block;font-family:"Plus Jakarta Sans";font-size:.98rem;margin-bottom:5px}
+  .loop .step .n{width:30px;height:30px;border-radius:9px;background:var(--lime);
+    color:var(--lime-ink);font-weight:800;display:grid;place-items:center;margin:0 auto 12px;font-size:.85rem}
+  .loop .step b{display:block;font-family:"Inter";font-size:.98rem;margin-bottom:5px}
   .loop .step span{color:var(--faint);font-size:.8rem}
   .loop .step::after{content:"→";position:absolute;right:-11px;top:50%;transform:translateY(-50%);color:var(--faint);font-size:1.1rem}
   .loop .step:last-child::after{display:none}
@@ -224,9 +229,9 @@
   .hook .badge{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;font-size:1.3rem}
   .hook h4{font-size:1.12rem}
   .hook p{color:var(--muted);font-size:.92rem;margin-bottom:14px}
-  .hook .why{font-size:.82rem;color:var(--gold);font-weight:600;background:rgba(242,106,46,.08);
-    border:1px solid rgba(242,106,46,.22);border-radius:10px;padding:9px 12px}
-  .hook .why b{color:var(--gold-2)}
+  .hook .why{font-size:.82rem;color:var(--lime-text);font-weight:700;background:var(--lime-wash);
+    border:1px solid rgba(94,115,0,.22);border-radius:8px;padding:9px 12px}
+  .hook .why b{color:var(--ink)}
   @media(max-width:880px){.hooks{grid-template-columns:1fr}}
 
   /* ---------- tier ladder ---------- */
@@ -234,29 +239,31 @@
   .tier{border-radius:16px;padding:22px 16px;text-align:center;position:relative;border:1px solid var(--line);overflow:hidden}
   .tier .coin{width:54px;height:54px;border-radius:50%;margin:0 auto 12px;display:grid;place-items:center;font-size:1.5rem;
     box-shadow:inset 0 -4px 8px rgba(0,0,0,.3),0 6px 14px -6px rgba(0,0,0,.6)}
-  .tier b{font-family:"Plus Jakarta Sans";display:block;font-size:1.05rem}
+  .tier b{font-family:"Inter";display:block;font-size:1.05rem}
   .tier span{color:var(--faint);font-size:.78rem}
-  .tier.bronze .coin{background:linear-gradient(135deg,#c87f44,#8a5524)}
-  .tier.silver .coin{background:linear-gradient(135deg,#d7dde6,#9aa6b5)}
-  .tier.gold .coin{background:linear-gradient(135deg,#f7d067,#d99a26)}
-  .tier.plat .coin{background:linear-gradient(135deg,#7fe6e0,#36a8a0)}
-  .tier.elite .coin{background:linear-gradient(135deg,#a78bfa,#6d4ee0)}
-  .tier.elite{border-color:rgba(167,139,250,.5);box-shadow:0 0 0 1px rgba(167,139,250,.25),0 18px 40px -20px rgba(124,92,240,.6)}
+  .tier{background:var(--card);box-shadow:var(--shadow)}
+  .tier .coin{box-shadow:none;border:1px solid rgba(0,0,0,.06)}
+  .tier.bronze .coin{background:#FFE5D8}.tier.bronze b{color:#92400E}
+  .tier.silver .coin{background:#F4EDE8}.tier.silver b{color:#756F69}
+  .tier.gold .coin{background:#FFE6D3}.tier.gold b{color:#C2860A}
+  .tier.plat .coin{background:#CCFBF1}.tier.plat b{color:#0F766E}
+  .tier.elite .coin{background:var(--ink);color:#fff}.tier.elite b{color:var(--ink)}
+  .tier.elite{border-color:var(--ink-border);background:var(--ink-soft);box-shadow:0 0 0 1px var(--ink-border),0 14px 30px -18px rgba(16,24,39,.5)}
   @media(max-width:880px){.ladder{grid-template-columns:1fr 1fr 1fr}}
 
   /* ---------- upcoming / roadmap ---------- */
-  .soon{position:relative;background:linear-gradient(135deg,#0d3b35,#0a5a52 55%,#7a2a12);
-    border-radius:var(--radius-lg);padding:64px 44px;overflow:hidden;border:1px solid rgba(18,165,148,.4)}
+  .soon{position:relative;background:var(--ink-plate-gradient);
+    border-radius:var(--radius-lg);padding:64px 44px;overflow:hidden;border:1px solid #2A3342;box-shadow:var(--shadow-plate)}
   .soon::before{content:"";position:absolute;width:520px;height:520px;border-radius:50%;
-    background:radial-gradient(circle,rgba(242,106,46,.28),transparent 70%);top:-200px;right:-120px}
+    background:radial-gradient(circle,rgba(200,240,42,.20),transparent 70%);top:-200px;right:-120px}
   .soon::after{content:"";position:absolute;width:460px;height:460px;border-radius:50%;
-    background:radial-gradient(circle,rgba(18,165,148,.32),transparent 70%);bottom:-220px;left:-120px}
+    background:radial-gradient(circle,rgba(94,115,0,.35),transparent 70%);bottom:-220px;left:-120px}
   .soon-head{text-align:center;max-width:680px;margin:0 auto 42px;position:relative;z-index:2}
-  .soon-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);
-    border:1px solid rgba(255,255,255,.25);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.1em;
-    text-transform:uppercase;padding:7px 15px;border-radius:999px;margin-bottom:18px}
+  .soon-badge{display:inline-flex;align-items:center;gap:8px;background:var(--lime);
+    border:1px solid transparent;color:var(--lime-ink);font-weight:700;font-size:.78rem;letter-spacing:.1em;
+    text-transform:uppercase;padding:7px 15px;border-radius:6px;margin-bottom:18px}
   .soon-head h2{color:#fff;font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:800;margin-bottom:14px}
-  .soon-head p{color:#d7efe9;font-size:1.12rem}
+  .soon-head p{color:rgba(255,255,255,.78);font-size:1.12rem}
   .soon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;position:relative;z-index:2}
   .soon-card{position:relative;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);
     border-radius:var(--radius);padding:24px;overflow:hidden;min-height:188px}
@@ -268,51 +275,50 @@
   .soon-card .blur .ln{height:9px;border-radius:5px;background:rgba(255,255,255,.4);margin-bottom:9px}
   .soon-card .blur .ln.s{width:62%}
   .soon-card .tease{position:absolute;left:0;right:0;bottom:0;padding:14px 24px;font-size:.82rem;font-weight:700;
-    color:#fff;background:linear-gradient(0deg,rgba(8,30,27,.85),transparent);z-index:3}
-  .soon-foot{text-align:center;color:#cdeee8;margin-top:36px;position:relative;z-index:2;font-size:1.02rem}
+    color:#fff;background:linear-gradient(0deg,rgba(10,13,22,.9),transparent);z-index:3}
+  .soon-foot{text-align:center;color:rgba(255,255,255,.74);margin-top:36px;position:relative;z-index:2;font-size:1.02rem}
   @media(max-width:880px){.soon{padding:44px 24px}.soon-grid{grid-template-columns:1fr}}
 
   /* ---------- trust ---------- */
-  .trust{background:linear-gradient(135deg,#ecf6f3,#f8fcfb);border:1px solid var(--line);border-radius:var(--radius-lg);
+  .trust{background:var(--ink-soft);border:1px solid var(--ink-soft-strong);border-radius:var(--radius-lg);
     padding:44px;text-align:center}
   .trust .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:34px}
-  .trust .stat b{font-family:"Plus Jakarta Sans";font-size:2.3rem;font-weight:800;display:block;
-    background:linear-gradient(120deg,var(--primary),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .trust .stat b{font-family:"Inter";font-size:2.3rem;font-weight:800;display:block;color:var(--ink)}
   .trust .stat span{color:var(--muted);font-size:.88rem}
   @media(max-width:880px){.trust .stats{grid-template-columns:1fr 1fr}}
 
   /* ---------- sports ---------- */
   .sports{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
   .sport{display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--line);
-    border-radius:999px;padding:12px 22px;font-weight:600;font-size:.96rem}
+    border-radius:var(--radius-btn);padding:12px 22px;font-weight:700;box-shadow:var(--shadow);font-size:.96rem}
   .sport .e{font-size:1.3rem}
 
   /* ---------- CTA ---------- */
-  .cta{background:linear-gradient(135deg,var(--primary-2),#0a5a52 55%,#7a2a12);border-radius:var(--radius-lg);
-    padding:60px;text-align:center;position:relative;overflow:hidden;border:1px solid rgba(18,165,148,.4)}
+  .cta{background:var(--ink-plate-gradient);border-radius:var(--radius-lg);
+    padding:60px;text-align:center;position:relative;overflow:hidden;border:1px solid #2A3342;box-shadow:var(--shadow-plate)}
   .cta::before{content:"";position:absolute;width:500px;height:500px;border-radius:50%;
-    background:radial-gradient(circle,rgba(242,106,46,.22),transparent 70%);top:-200px;right:-100px}
+    background:radial-gradient(circle,rgba(200,240,42,.22),transparent 70%);top:-200px;right:-100px}
   .cta h2{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:14px;position:relative;color:#fff}
-  .cta p{color:#cdeee8;font-size:1.15rem;max-width:560px;margin:0 auto 28px;position:relative}
+  .cta p{color:rgba(255,255,255,.74);font-size:1.15rem;max-width:560px;margin:0 auto 28px;position:relative}
   .store-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
-  .store{display:flex;align-items:center;gap:11px;background:#05070f;border:1px solid rgba(255,255,255,.18);
-    border-radius:14px;padding:12px 20px;transition:.2s}
-  .store:hover{transform:translateY(-3px);background:#0a0f1c}
-  .store .e{font-size:1.6rem}
-  .store small{display:block;font-size:.68rem;color:rgba(255,255,255,.72)}
-  .store b{font-family:"Plus Jakarta Sans";font-size:1rem;color:#fff}
+  .store{display:flex;align-items:center;gap:11px;background:#FFFFFF;border:1px solid transparent;
+    border-radius:var(--radius-btn);padding:12px 20px;transition:.2s}
+  .store:hover{transform:translateY(-3px);background:var(--lime)}
+  .store .e{font-size:1.6rem;color:var(--ink)}
+  .store small{display:block;font-size:.68rem;color:var(--muted);font-weight:600}
+  .store b{font-family:"Inter";font-size:1rem;color:var(--ink);font-weight:800}
 
   /* ---------- footer ---------- */
   footer{border-top:1px solid var(--line-soft);padding:46px 0 36px;margin-top:30px}
   .foot{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;align-items:flex-start}
   .foot .links{display:flex;gap:40px;flex-wrap:wrap}
-  .foot .col b{font-family:"Plus Jakarta Sans";font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);display:block;margin-bottom:12px}
+  .foot .col b{font-family:"Inter";font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;color:var(--faint);display:block;margin-bottom:12px}
   .foot .col a{display:block;color:var(--muted);font-size:.92rem;margin-bottom:9px;transition:.2s}
   .foot .col a:hover{color:var(--text)}
   .foot-bottom{margin-top:34px;padding-top:22px;border-top:1px solid var(--line-soft);
     display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;color:var(--faint);font-size:.85rem}
 
-  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .5s cubic-bezier(.215,.61,.355,1),transform .5s cubic-bezier(.215,.61,.355,1)}
   .reveal.in{opacity:1;transform:none}
 </style>
 </head>
@@ -322,7 +328,7 @@
 <!-- NAV -->
 <nav>
   <div class="wrap nav-in">
-    <a class="brand" href="#"><img class="logo" src="assets/logo.png" alt="Sadarah" /> Sadarah</a>
+    <a class="brand" href="#"><img class="logo" src="assets/app-icon.png" alt="" /><img class="wm" src="assets/wordmark.png" alt="Sadarah" /></a>
     <div class="nav-links">
       <a href="#rating">The Rating</a>
       <a href="#value">Why it matters</a>
@@ -362,7 +368,7 @@
       <div class="float-card fc-1">
         <div style="font-size:.7rem;color:var(--faint);text-transform:uppercase;letter-spacing:.08em">Rating change</div>
         <div style="display:flex;align-items:center;gap:8px;margin-top:4px">
-          <b style="font-family:'Plus Jakarta Sans';font-size:1.3rem">+24</b>
+          <b style="font-family:'Inter';font-size:1.3rem">+24</b>
           <span style="color:var(--green);font-weight:700;font-size:.85rem">▲ win streak ×3</span>
         </div>
       </div>
@@ -370,7 +376,7 @@
         <div style="font-size:.7rem;color:var(--faint);text-transform:uppercase;letter-spacing:.08em">New badge</div>
         <div style="display:flex;align-items:center;gap:9px;margin-top:5px">
           <span style="font-size:1.4rem">🏅</span>
-          <b style="font-family:'Plus Jakarta Sans';font-size:.98rem">Court Regular</b>
+          <b style="font-family:'Inter';font-size:.98rem">Court Regular</b>
         </div>
       </div>
 
@@ -391,14 +397,14 @@
             </div>
             <div class="m-body">
               <div style="display:flex;justify-content:space-between;align-items:center">
-                <b style="font-family:'Plus Jakarta Sans';font-size:.95rem">Academy leaderboard</b>
-                <span style="font-size:.72rem;color:#0c7d72;font-weight:700">This week</span>
+                <b style="font-family:'Inter';font-size:.95rem">Academy leaderboard</b>
+                <span style="font-size:.72rem;color:var(--primary);font-weight:700">This week</span>
               </div>
-              <div class="m-row"><div class="who"><span class="rk" style="background:#d99a26">1</span> Lara H.</div><span class="pts">1,612</span></div>
-              <div class="m-row me"><div class="who"><span class="rk" style="background:#0c7d72">4</span> You</div><span class="pts">1,486</span></div>
-              <div class="m-row"><div class="who"><span class="rk" style="background:#7c8aa5">5</span> Omar S.</div><span class="pts">1,455</span></div>
+              <div class="m-row"><div class="who"><span class="rk" style="background:#C2860A">1</span> Lara H.</div><span class="pts">1,612</span></div>
+              <div class="m-row me"><div class="who"><span class="rk" style="background:var(--ink)">4</span> You</div><span class="pts">1,486</span></div>
+              <div class="m-row"><div class="who"><span class="rk" style="background:#756F69">5</span> Omar S.</div><span class="pts">1,455</span></div>
               <div class="m-row" style="flex-direction:column;align-items:stretch;gap:8px">
-                <span style="font-size:.72rem;color:#667085;font-weight:600">Rating over last 8 matches</span>
+                <span style="font-size:.72rem;color:var(--muted);font-weight:600">Rating over last 8 matches</span>
                 <div class="m-bars"><i style="height:40%"></i><i style="height:52%"></i><i style="height:46%"></i><i style="height:64%"></i><i style="height:58%"></i><i style="height:76%"></i><i style="height:70%"></i><i style="height:92%"></i></div>
               </div>
             </div>
@@ -422,11 +428,11 @@
       <div>
         <div class="ring">
           <svg width="230" height="230" viewBox="0 0 230 230">
-            <circle cx="115" cy="115" r="100" fill="none" stroke="#dceae6" stroke-width="16"/>
+            <circle cx="115" cy="115" r="100" fill="none" stroke="#E3E8F0" stroke-width="16"/>
             <circle id="ringArc" cx="115" cy="115" r="100" fill="none" stroke="url(#g)" stroke-width="16"
               stroke-linecap="round" stroke-dasharray="628" stroke-dashoffset="628"/>
             <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#12a594"/><stop offset="1" stop-color="#ee6a2b"/>
+              <stop offset="0" stop-color="#84BE00"/><stop offset="1" stop-color="#C8F02A"/>
             </linearGradient></defs>
           </svg>
           <div class="center">
@@ -495,13 +501,13 @@
         <div class="persona-visual">
           <div style="font-size:.72rem;color:var(--faint);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px">Player snapshot</div>
           <div style="display:flex;justify-content:space-between;align-items:center;background:#ffffff;border:1px solid var(--line);border-radius:13px;padding:16px;margin-bottom:12px">
-            <div><div style="color:var(--faint);font-size:.74rem">Current rating</div><b style="font-family:'Plus Jakarta Sans';font-size:1.7rem">1,486</b></div>
+            <div><div style="color:var(--faint);font-size:.74rem">Current rating</div><b style="font-family:'Inter';font-size:1.7rem">1,486</b></div>
             <div style="text-align:right"><span class="m-tier">GOLD III</span><div style="color:var(--green);font-size:.82rem;font-weight:700;margin-top:6px">+24 this week ▲</div></div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center"><b style="font-family:'Plus Jakarta Sans';font-size:1.2rem">68%</b><div style="color:var(--faint);font-size:.72rem">Win rate</div></div>
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center"><b style="font-family:'Plus Jakarta Sans';font-size:1.2rem">42</b><div style="color:var(--faint);font-size:.72rem">Matches</div></div>
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center"><b style="font-family:'Plus Jakarta Sans';font-size:1.2rem">7</b><div style="color:var(--faint);font-size:.72rem">Badges</div></div>
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center"><b style="font-family:'Inter';font-size:1.2rem">68%</b><div style="color:var(--faint);font-size:.72rem">Win rate</div></div>
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center"><b style="font-family:'Inter';font-size:1.2rem">42</b><div style="color:var(--faint);font-size:.72rem">Matches</div></div>
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:11px;padding:13px;text-align:center"><b style="font-family:'Inter';font-size:1.2rem">7</b><div style="color:var(--faint);font-size:.72rem">Badges</div></div>
           </div>
         </div>
       </div>
@@ -519,33 +525,33 @@
           <div class="benefit"><div class="chk">✓</div><div><b>Fresh matchups, not the same four</b><span>Partners and opponents rotate round to round, so the session never feels repetitive.</span></div></div>
           <div class="benefit"><div class="chk">✓</div><div><b>Less setup, more play</b><span>Auto-balance, clear to bench, or keep lineups — your call, done in seconds instead of manual shuffling.</span></div></div>
         </div>
-        <div class="persona-visual" style="background:#e9eef6">
+        <div class="persona-visual" style="background:var(--ink-soft)">
           <div style="font-size:.72rem;color:var(--faint);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px">Smart round set-up</div>
-          <div style="background:#fff;border:1px solid #e2e8f0;border-radius:18px;padding:18px;box-shadow:0 12px 30px -16px rgba(16,48,42,.35)">
+          <div style="background:#fff;border:1px solid var(--ink-border);border-radius:18px;padding:18px;box-shadow:0 12px 30px -16px rgba(16,24,39,.18)">
             <div style="display:flex;gap:11px;align-items:flex-start;margin-bottom:14px">
-              <div style="flex:0 0 38px;height:38px;border-radius:11px;background:rgba(18,165,148,.14);display:grid;place-items:center;font-size:1.1rem">✨</div>
+              <div style="flex:0 0 38px;height:38px;border-radius:11px;background:var(--lime-wash);display:grid;place-items:center;font-size:1.1rem">✨</div>
               <div>
-                <div style="font-family:'Plus Jakarta Sans';font-weight:800;color:#10302a;font-size:1.05rem;line-height:1.2">Set up Round 2</div>
-                <div style="color:#64748b;font-size:.8rem">Choose how this round should start.</div>
+                <div style="font-family:'Inter';font-weight:800;color:var(--text);font-size:1.05rem;line-height:1.2">Set up Round 2</div>
+                <div style="color:var(--muted);font-size:.8rem">Choose how this round should start.</div>
               </div>
             </div>
-            <div style="border:1.5px solid var(--primary);background:rgba(18,165,148,.07);border-radius:13px;padding:12px;display:flex;gap:11px;align-items:center;margin-bottom:9px">
-              <div style="flex:0 0 34px;height:34px;border-radius:9px;background:rgba(18,165,148,.16);display:grid;place-items:center;font-size:1rem">⚖️</div>
+            <div style="border:1.5px solid var(--primary);background:var(--lime-wash);border-radius:13px;padding:12px;display:flex;gap:11px;align-items:center;margin-bottom:9px">
+              <div style="flex:0 0 34px;height:34px;border-radius:9px;background:var(--lime-wash);display:grid;place-items:center;font-size:1rem">⚖️</div>
               <div style="flex:1">
-                <div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#10302a;font-size:.88rem">Smart &amp; Balanced Distribution</div>
-                <div style="color:#64748b;font-size:.74rem;line-height:1.35">Avoids repeating teams and reduces overlap while keeping ratings balanced.</div>
+                <div style="font-family:'Inter';font-weight:700;color:var(--text);font-size:.88rem">Smart &amp; Balanced Distribution</div>
+                <div style="color:var(--muted);font-size:.74rem;line-height:1.35">Avoids repeating teams and reduces overlap while keeping ratings balanced.</div>
               </div>
               <div style="color:var(--primary);font-weight:800">›</div>
             </div>
-            <div style="background:#f1f5f9;border-radius:13px;padding:12px;display:flex;gap:11px;align-items:center;margin-bottom:9px">
-              <div style="flex:0 0 34px;height:34px;border-radius:9px;background:#e2e8f0;display:grid;place-items:center;font-size:1rem">🧹</div>
-              <div style="flex:1"><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#10302a;font-size:.88rem">Clear all to bench</div></div>
-              <div style="color:#94a3b8;font-weight:800">›</div>
+            <div style="background:var(--ink-soft);border-radius:13px;padding:12px;display:flex;gap:11px;align-items:center;margin-bottom:9px">
+              <div style="flex:0 0 34px;height:34px;border-radius:9px;background:var(--ink-border);display:grid;place-items:center;font-size:1rem">🧹</div>
+              <div style="flex:1"><div style="font-family:'Inter';font-weight:700;color:var(--text);font-size:.88rem">Clear all to bench</div></div>
+              <div style="color:var(--faint);font-weight:800">›</div>
             </div>
-            <div style="background:#f1f5f9;border-radius:13px;padding:12px;display:flex;gap:11px;align-items:center">
-              <div style="flex:0 0 34px;height:34px;border-radius:9px;background:#e2e8f0;display:grid;place-items:center;font-size:1rem">👥</div>
-              <div style="flex:1"><div style="font-family:'Plus Jakarta Sans';font-weight:700;color:#10302a;font-size:.88rem">Keep current lineups</div></div>
-              <div style="color:#94a3b8;font-weight:800">›</div>
+            <div style="background:var(--ink-soft);border-radius:13px;padding:12px;display:flex;gap:11px;align-items:center">
+              <div style="flex:0 0 34px;height:34px;border-radius:9px;background:var(--ink-border);display:grid;place-items:center;font-size:1rem">👥</div>
+              <div style="flex:1"><div style="font-family:'Inter';font-weight:700;color:var(--text);font-size:.88rem">Keep current lineups</div></div>
+              <div style="color:var(--faint);font-weight:800">›</div>
             </div>
           </div>
         </div>
@@ -572,15 +578,15 @@
           <div style="background:#ffffff;border:1px solid var(--line);border-radius:13px;padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:flex-end">
             <div>
               <div style="color:var(--faint);font-size:.74rem">Collected this month</div>
-              <b style="font-family:'Plus Jakarta Sans';font-size:1.7rem">JOD 12,480</b>
+              <b style="font-family:'Inter';font-size:1.7rem">JOD 12,480</b>
             </div>
             <div style="color:var(--green);font-size:.82rem;font-weight:700">+18% ▲</div>
           </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:13px;padding:14px"><b style="font-family:'Plus Jakarta Sans';font-size:1.5rem">148</b><div style="color:var(--faint);font-size:.76rem">Active subscriptions</div></div>
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:13px;padding:14px"><b style="font-family:'Plus Jakarta Sans';font-size:1.5rem">92%</b><div style="color:var(--faint);font-size:.76rem">Renewal rate</div></div>
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:13px;padding:14px"><b style="font-family:'Plus Jakarta Sans';font-size:1.5rem;color:var(--green)">100%</b><div style="color:var(--faint);font-size:.76rem">Settlements reconciled</div></div>
-            <div style="background:#ffffff;border:1px solid var(--line);border-radius:13px;padding:14px"><b style="font-family:'Plus Jakarta Sans';font-size:1.5rem">0</b><div style="color:var(--faint);font-size:.76rem">Spreadsheets needed</div></div>
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:13px;padding:14px"><b style="font-family:'Inter';font-size:1.5rem">148</b><div style="color:var(--faint);font-size:.76rem">Active subscriptions</div></div>
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:13px;padding:14px"><b style="font-family:'Inter';font-size:1.5rem">92%</b><div style="color:var(--faint);font-size:.76rem">Renewal rate</div></div>
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:13px;padding:14px"><b style="font-family:'Inter';font-size:1.5rem;color:var(--green)">100%</b><div style="color:var(--faint);font-size:.76rem">Settlements reconciled</div></div>
+            <div style="background:#ffffff;border:1px solid var(--line);border-radius:13px;padding:14px"><b style="font-family:'Inter';font-size:1.5rem">0</b><div style="color:var(--faint);font-size:.76rem">Spreadsheets needed</div></div>
           </div>
           <div style="margin-top:12px;font-size:.72rem;color:var(--faint)">Illustrative figures.</div>
         </div>
@@ -616,12 +622,12 @@
         <div class="mode-card">
           <div class="viz">
             <svg viewBox="0 0 120 100" width="120" height="80" fill="none" aria-hidden="true">
-              <g stroke="#0c8d7e" stroke-width="2.5" stroke-linecap="round">
+              <g stroke="#182238" stroke-width="2.5" stroke-linecap="round">
                 <path d="M10 18h30"/><path d="M10 38h30"/><path d="M40 18v20"/><path d="M40 28h22"/>
                 <path d="M10 62h30"/><path d="M10 82h30"/><path d="M40 62v20"/><path d="M40 72h22"/>
                 <path d="M62 28v44"/><path d="M62 50h24"/>
               </g>
-              <circle cx="95" cy="50" r="9" fill="#ee6a2b"/>
+              <circle cx="95" cy="50" r="9" fill="#C8F02A"/>
             </svg>
           </div>
           <h4>Playoffs</h4>
@@ -631,11 +637,11 @@
         <div class="mode-card">
           <div class="viz">
             <svg viewBox="0 0 120 120" width="86" height="80" fill="none" aria-hidden="true">
-              <g stroke="#0c8d7e" stroke-width="2" opacity=".55" stroke-linecap="round">
+              <g stroke="#182238" stroke-width="2" opacity=".55" stroke-linecap="round">
                 <path d="M60 14L108 60"/><path d="M60 14L12 60"/><path d="M60 14L60 106"/>
                 <path d="M108 60L12 60"/><path d="M108 60L60 106"/><path d="M12 60L60 106"/>
               </g>
-              <g fill="#0c8d7e"><circle cx="60" cy="14" r="7"/><circle cx="108" cy="60" r="7"/><circle cx="60" cy="106" r="7"/><circle cx="12" cy="60" r="7"/></g>
+              <g fill="#182238"><circle cx="60" cy="14" r="7"/><circle cx="108" cy="60" r="7"/><circle cx="60" cy="106" r="7"/><circle cx="12" cy="60" r="7"/></g>
             </svg>
           </div>
           <h4>Round Robin</h4>
@@ -645,14 +651,14 @@
         <div class="mode-card">
           <div class="viz">
             <svg viewBox="0 0 150 100" width="130" height="80" fill="none" aria-hidden="true">
-              <rect x="8" y="20" width="40" height="26" rx="6" fill="none" stroke="#0c8d7e" stroke-width="2"/>
-              <rect x="8" y="54" width="40" height="26" rx="6" fill="none" stroke="#0c8d7e" stroke-width="2"/>
-              <g fill="#0c8d7e"><circle cx="20" cy="33" r="3"/><circle cx="36" cy="33" r="3"/><circle cx="20" cy="67" r="3"/><circle cx="36" cy="67" r="3"/></g>
+              <rect x="8" y="20" width="40" height="26" rx="6" fill="none" stroke="#182238" stroke-width="2"/>
+              <rect x="8" y="54" width="40" height="26" rx="6" fill="none" stroke="#182238" stroke-width="2"/>
+              <g fill="#182238"><circle cx="20" cy="33" r="3"/><circle cx="36" cy="33" r="3"/><circle cx="20" cy="67" r="3"/><circle cx="36" cy="67" r="3"/></g>
               <path d="M52 50h14" stroke="#7d948d" stroke-width="2"/><path d="M62 46l5 4-5 4" stroke="#7d948d" stroke-width="2" fill="none"/>
-              <g stroke="#ee6a2b" stroke-width="2.5" stroke-linecap="round" fill="none">
+              <g stroke="#5E7300" stroke-width="2.5" stroke-linecap="round" fill="none">
                 <path d="M78 34h16v16h14"/><path d="M78 66h16v-16"/>
               </g>
-              <circle cx="123" cy="50" r="8" fill="#ee6a2b"/>
+              <circle cx="123" cy="50" r="8" fill="#C8F02A"/>
             </svg>
           </div>
           <h4>Mixed</h4>
@@ -665,7 +671,7 @@
 </section>
 
 <!-- ENGAGEMENT & ATTACHMENT -->
-<section id="engagement" style="background:linear-gradient(180deg,transparent,rgba(18,165,148,.07),transparent)">
+<section id="engagement" style="background:linear-gradient(180deg,transparent,var(--ink-soft),transparent)">
   <div class="wrap">
     <div class="eng-hero reveal">
       <div class="eyebrow">The real magic</div>
@@ -685,32 +691,32 @@
     <!-- attachment hooks -->
     <div class="hooks">
       <div class="hook reveal">
-        <div class="top"><div class="badge" style="background:rgba(242,106,46,.14)">📈</div><h4>Progress you own</h4></div>
+        <div class="top"><div class="badge" style="background:var(--ink-soft)">📈</div><h4>Progress you own</h4></div>
         <p>A rising rating and growing match history become a personal investment. Players feel they’re building something — and losing it would hurt.</p>
         <div class="why">🧠 <b>Endowment effect:</b> we protect what feels ours.</div>
       </div>
       <div class="hook reveal">
-        <div class="top"><div class="badge" style="background:rgba(18,165,148,.14)">🏆</div><h4>Rivals &amp; rank</h4></div>
+        <div class="top"><div class="badge" style="background:var(--ink-soft)">🏆</div><h4>Rivals &amp; rank</h4></div>
         <p>Seeing someone 30 points ahead is an itch. Leaderboards manufacture friendly rivalry that pulls players back to close the gap.</p>
         <div class="why">🧠 <b>Social comparison:</b> rank is a powerful motivator.</div>
       </div>
       <div class="hook reveal">
-        <div class="top"><div class="badge" style="background:rgba(47,201,138,.14)">🎖️</div><h4>Milestone badges</h4></div>
+        <div class="top"><div class="badge" style="background:var(--ink-soft)">🎖️</div><h4>Milestone badges</h4></div>
         <p>First win, win streaks, loyalty, comebacks — each badge is a tiny, collectible celebration that rewards showing up, not just winning.</p>
         <div class="why">🧠 <b>Variable rewards:</b> the next badge is always close.</div>
       </div>
       <div class="hook reveal">
-        <div class="top"><div class="badge" style="background:rgba(167,139,250,.14)">🥇</div><h4>Tier promotions</h4></div>
+        <div class="top"><div class="badge" style="background:var(--ink-soft)">🥇</div><h4>Tier promotions</h4></div>
         <p>Climbing from Bronze to Platinum gives long-term direction. Each tier is a goal big enough to train for over a season.</p>
         <div class="why">🧠 <b>Goal gradient:</b> effort rises as the tier nears.</div>
       </div>
       <div class="hook reveal">
-        <div class="top"><div class="badge" style="background:rgba(239,90,90,.14)">🔔</div><h4>Timely nudges</h4></div>
+        <div class="top"><div class="badge" style="background:var(--ink-soft)">🔔</div><h4>Timely nudges</h4></div>
         <p>Session reminders, “a spot reclaimed,” rating changes and rank shifts bring players back at exactly the right moment.</p>
         <div class="why">🧠 <b>Trigger → action:</b> well-timed cues build habits.</div>
       </div>
       <div class="hook reveal">
-        <div class="top"><div class="badge" style="background:rgba(18,165,148,.14)">🤝</div><h4>Belonging</h4></div>
+        <div class="top"><div class="badge" style="background:var(--ink-soft)">🤝</div><h4>Belonging</h4></div>
         <p>Shared sessions, rosters and an academy identity make Sadarah a community — not just a tracker. People stay where they belong.</p>
         <div class="why">🧠 <b>Identity &amp; community:</b> the stickiest retention there is.</div>
       </div>
@@ -850,7 +856,7 @@
         <a class="store" href="https://apps.apple.com/jo/app/sadarah-%D8%B5%D8%AF%D8%A7%D8%B1%D9%87/id6771104812" target="_blank" rel="noopener"><span class="e"></span><div style="text-align:left"><small>Download on the</small><b>App Store</b></div></a>
         <a class="store" href="https://play.google.com/store/apps/details?id=com.evoapp.sports" target="_blank" rel="noopener"><span class="e">▶</span><div style="text-align:left"><small>Get it on</small><b>Google Play</b></div></a>
       </div>
-      <div style="margin-top:18px;font-size:.85rem;color:#bfeae2;position:relative">Questions? <a href="mailto:support@sadarah.app" style="color:#fff;text-decoration:underline">support@sadarah.app</a></div>
+      <div style="margin-top:18px;font-size:.85rem;color:rgba(255,255,255,.72);position:relative">Questions? <a href="mailto:support@sadarah.app" style="color:#fff;text-decoration:underline">support@sadarah.app</a></div>
     </div>
   </div>
 </section>
@@ -860,8 +866,8 @@
   <div class="wrap">
     <div class="foot">
       <div style="max-width:300px">
-        <a class="brand" href="#" style="margin-bottom:14px"><img class="logo" src="assets/logo.png" alt="Sadarah" /> Sadarah</a>
-        <p style="color:var(--muted);font-size:.92rem">The player companion app for modern sports academies. <span class="accent arabic">صدارة</span> — your top spot.</p>
+        <a class="brand" href="#" style="margin-bottom:14px"><img class="logo" src="assets/app-icon.png" alt="" /><img class="wm" src="assets/wordmark.png" alt="Sadarah" /></a>
+        <p style="color:var(--muted);font-size:.92rem">The player companion app for modern sports academies. <span class="accent arabic" style="font-weight:800">صدارة</span> — your top spot.</p>
       </div>
       <div class="links">
         <div class="col"><b>Product</b>
