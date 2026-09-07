@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Get Sadarah</title>
+  <meta name="description" content="Sadarah — book padel sessions, get matched by rating, and track your progress.">
+  <meta name="apple-itunes-app" content="app-id=6771104812">
+  <meta property="og:title" content="Sadarah — صدارة">
+  <meta property="og:description" content="Book sessions, get matched by rating, track your progress.">
+  <meta property="og:image" content="https://sadarahapp.com/assets/card.png">
+  <meta property="og:url" content="https://sadarahapp.com/get">
+  <meta name="twitter:card" content="summary_large_image">
+  <style>
+    :root { color-scheme: light dark; --lime:#C8F02A; --lime-ink:#14210A; --lime-hover:#B4DC18; --ink:#182238; --ink-soft:#EEF1F5; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; display: flex; align-items: center;
+      justify-content: center; font-family: -apple-system, BlinkMacSystemFont,
+      "Segoe UI", Roboto, "Noto Sans Arabic", sans-serif;
+      background: #F7F7F5; color: #17191C; padding: 24px; font-weight: 500;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0D0D0D; color: #FFFBF8; }
+      .ghost { color: #A8BBDE !important; background: #1A2130 !important; border-color: #2A3342 !important; }
+      p { color: #A69E98 !important; }
+    }
+    .card { text-align: center; max-width: 360px; width: 100%; }
+    .logo { width: 88px; height: 88px; border-radius: 20px; }
+    h1 { font-size: 24px; font-weight: 800; margin: 14px 0 4px; }
+    p { color: #6C7076; font-size: 14px; margin: 0 0 24px; }
+    .btn {
+      display: block; width: 100%; padding: 16px 18px; border-radius: 8px;
+      font-weight: 800; font-size: 15px; text-decoration: none; margin-top: 12px;
+    }
+    .primary { background: var(--lime); color: var(--lime-ink); box-shadow: 0 10px 20px rgba(200,240,42,.30); }
+    .primary:hover { background: var(--lime-hover); }
+    .ghost { background: var(--ink-soft); color: var(--ink); border: 1px solid var(--ink-soft); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="/assets/app-icon.png" alt="Sadarah">
+    <h1 id="title">Sadarah</h1>
+    <p id="msg">Book sessions, get matched by rating, track your progress.</p>
+    <a id="iosBtn" class="btn primary" href="#" style="display:none">App Store</a>
+    <a id="androidBtn" class="btn primary" href="#" style="display:none">Google Play</a>
+    <a id="appBtn" class="btn ghost" href="#" style="display:none">Open in app</a>
+  </div>
+
+  <script>
+    (function () {
+      var IOS_STORE = 'https://apps.apple.com/app/id6771104812';
+      var ANDROID_STORE = 'https://play.google.com/store/apps/details?id=com.evoapp.sports';
+
+      // Campaign tag: /get?c=instagram — forwarded to both stores so installs
+      // show up attributed (Play: install referrer, App Store: campaign token).
+      var params = new URLSearchParams(window.location.search);
+      var campaign = (params.get('c') || params.get('utm_source') || '').slice(0, 60);
+      var ios = IOS_STORE + (campaign ? '?ct=' + encodeURIComponent(campaign) + '&mt=8' : '');
+      var android = ANDROID_STORE + (campaign
+        ? '&referrer=' + encodeURIComponent('utm_source=' + campaign + '&utm_medium=marketing')
+        : '');
+
+      var ua = navigator.userAgent || '';
+      var isIOS = (/iPad|iPhone|iPod/.test(ua) ||
+                   (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) && !window.MSStream;
+      var isAndroid = /Android/.test(ua);
+      var store = isIOS ? ios : (isAndroid ? android : null);
+
+      var lang = (navigator.language || '').toLowerCase();
+      var ar = lang.indexOf('ar') === 0;
+      var T = ar ? {
+        tagline: 'احجز جلساتك، تنافس مع لاعبين بمستواك، وتابع تطورك.',
+        opening: 'جارٍ فتح التطبيق…',
+        choose: 'حمّل التطبيق على هاتفك.',
+        openApp: 'فتح التطبيق',
+        ios: 'آب ستور',
+        android: 'جوجل بلاي'
+      } : {
+        tagline: 'Book sessions, get matched by rating, track your progress.',
+        opening: 'Opening the app…',
+        choose: 'Get the app on your phone.',
+        openApp: 'Open in app',
+        ios: 'App Store',
+        android: 'Google Play'
+      };
+      if (ar) {
+        document.documentElement.lang = 'ar';
+        document.documentElement.dir = 'rtl';
+      }
+
+      var msg = document.getElementById('msg');
+      var appBtn = document.getElementById('appBtn');
+      var iosBtn = document.getElementById('iosBtn');
+      var androidBtn = document.getElementById('androidBtn');
+      msg.textContent = T.tagline;
+      appBtn.textContent = T.openApp;
+      iosBtn.textContent = T.ios;
+      androidBtn.textContent = T.android;
+      iosBtn.href = ios;
+      androidBtn.href = android;
+      // The app ignores non-/join links, so this just brings it to the front.
+      appBtn.href = 'evosports://open';
+
+      // Desktop (or an unknown platform): offer both stores, no redirect.
+      if (!store) {
+        msg.textContent = T.choose;
+        iosBtn.style.display = 'block';
+        androidBtn.style.display = 'block';
+        return;
+      }
+
+      // Phone: try the app first, fall back to that platform's store. If the
+      // app took over, the page is hidden by the time the timer fires.
+      msg.textContent = T.opening;
+      appBtn.style.display = 'block';
+      (isIOS ? iosBtn : androidBtn).style.display = 'block';
+
+      var start = Date.now();
+      var fallback = setTimeout(function () {
+        if (document.hidden) return;
+        if (Date.now() - start > 2200) return;
+        window.location.replace(store);
+      }, 1400);
+
+      function cancel() { clearTimeout(fallback); }
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) cancel();
+      });
+      window.addEventListener('pagehide', cancel);
+
+      window.location.href = 'evosports://open';
+    })();
+  </script>
+</body>
+</html>

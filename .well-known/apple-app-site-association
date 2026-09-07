@@ -5,7 +5,9 @@
         "appIDs": ["W42ZCU5L99.com.evoapp.sports"],
         "components": [
           { "/": "/join/", "comment": "Sadarah session invite links (query form)" },
-          { "/": "/join/*", "comment": "Sadarah session invite links" }
+          { "/": "/join/*", "comment": "Sadarah session invite links" },
+          { "/": "/get", "comment": "Marketing link — opens the app when installed" },
+          { "/": "/get/*", "comment": "Marketing link — opens the app when installed" }
         ]
       }
     ]
