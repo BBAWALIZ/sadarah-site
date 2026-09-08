@@ -34,9 +34,14 @@
     h1 { font-size: 24px; font-weight: 800; margin: 14px 0 4px; }
     p { color: #6C7076; font-size: 14px; margin: 0 0 24px; }
     .btn {
-      display: block; width: 100%; padding: 16px 18px; border-radius: 8px;
+      display: none; width: 100%; padding: 16px 18px; border-radius: 8px;
       font-weight: 800; font-size: 15px; text-decoration: none; margin-top: 12px;
+      align-items: center; justify-content: center; gap: 10px;
     }
+    /* Shown by script once the platform is known; .btn stays display:none until
+       then so a store button never flashes on the wrong device. */
+    .btn.show { display: flex; }
+    .btn svg { width: 20px; height: 20px; flex: 0 0 20px; }
     .primary { background: var(--lime); color: var(--lime-ink); box-shadow: 0 10px 20px rgba(200,240,42,.30); }
     .primary:hover { background: var(--lime-hover); }
     .ghost { background: var(--ink-soft); color: var(--ink); border: 1px solid var(--ink-soft); }
@@ -47,9 +52,9 @@
     <img class="logo" src="/assets/app-icon.png" alt="Sadarah">
     <h1 id="title">Sadarah</h1>
     <p id="msg">Book sessions, get matched by rating, track your progress.</p>
-    <a id="iosBtn" class="btn primary" href="#" style="display:none">App Store</a>
-    <a id="androidBtn" class="btn primary" href="#" style="display:none">Google Play</a>
-    <a id="appBtn" class="btn ghost" href="#" style="display:none">Open in app</a>
+    <a id="iosBtn" class="btn primary" href="#"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M17.05 12.54c-.03-2.87 2.34-4.24 2.45-4.31-1.34-1.96-3.42-2.23-4.16-2.26-1.77-.18-3.46 1.04-4.36 1.04-.9 0-2.28-1.02-3.75-.99-1.93.03-3.71 1.12-4.7 2.85-2 3.47-.51 8.6 1.44 11.42.95 1.38 2.09 2.93 3.58 2.87 1.43-.06 1.98-.93 3.71-.93 1.73 0 2.23.93 3.75.9 1.55-.03 2.53-1.4 3.48-2.79 1.09-1.6 1.54-3.15 1.57-3.23-.04-.02-3.01-1.16-3.04-4.57M14.3 4.1c.79-.96 1.32-2.29 1.18-3.62-1.14.05-2.52.76-3.34 1.72-.73.85-1.38 2.21-1.2 3.51 1.27.1 2.57-.65 3.36-1.61"/></svg><span></span></a>
+    <a id="androidBtn" class="btn primary" href="#"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="#00A0FF" d="M1.6 1.3c-.4.4-.6.9-.6 1.6v18.2c0 .7.2 1.2.6 1.6l.1.1 10.2-10.2v-.2L1.7 1.2z"/><path fill="#FFCE00" d="M15.6 15.6l-3.7-3.5v-.2l3.7-3.5.1.1 4.3 2.5c1.2.7 1.2 1.8 0 2.5l-4.3 2.1z"/><path fill="#FF3A44" d="M15.7 15.5L11.9 12 1.6 22.7c.4.4 1.1.5 1.8.1l12.3-7.3"/><path fill="#00C853" d="M15.7 8.5L3.4 1.3C2.7.8 2 .9 1.6 1.3L11.9 12z"/></svg><span></span></a>
+    <a id="appBtn" class="btn ghost" href="#"><span></span></a>
   </div>
 
   <script>
@@ -99,9 +104,9 @@
       var iosBtn = document.getElementById('iosBtn');
       var androidBtn = document.getElementById('androidBtn');
       msg.textContent = T.tagline;
-      appBtn.textContent = T.openApp;
-      iosBtn.textContent = T.ios;
-      androidBtn.textContent = T.android;
+      appBtn.querySelector('span').textContent = T.openApp;
+      iosBtn.querySelector('span').textContent = T.ios;
+      androidBtn.querySelector('span').textContent = T.android;
       iosBtn.href = ios;
       androidBtn.href = android;
       // The app ignores non-/join links, so this just brings it to the front.
@@ -110,16 +115,16 @@
       // Desktop (or an unknown platform): offer both stores, no redirect.
       if (!store) {
         msg.textContent = T.choose;
-        iosBtn.style.display = 'block';
-        androidBtn.style.display = 'block';
+        iosBtn.classList.add('show');
+        androidBtn.classList.add('show');
         return;
       }
 
       // Phone: try the app first, fall back to that platform's store. If the
       // app took over, the page is hidden by the time the timer fires.
       msg.textContent = T.opening;
-      appBtn.style.display = 'block';
-      (isIOS ? iosBtn : androidBtn).style.display = 'block';
+      appBtn.classList.add('show');
+      (isIOS ? iosBtn : androidBtn).classList.add('show');
 
       var start = Date.now();
       var fallback = setTimeout(function () {
